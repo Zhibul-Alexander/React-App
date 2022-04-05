@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Todo } from "./components"
 
 ReactDOM.render(
-  <h1>Hello World !!!</h1>,
+  <Todo />,
   document.getElementById('root'),
 );
