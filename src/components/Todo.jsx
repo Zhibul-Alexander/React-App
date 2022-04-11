@@ -23,12 +23,12 @@ export class Todo extends React.Component {
 
     state = {
         tasks: [
-            { id: 1, label: "Выучить JS", isDone: true },
-            { id: 2, label: "Выучить React", isDone: false },
-            { id: 3, label: "Сделать todo", isDone: true },
-            { id: 4, label: "Оживить todo", isDone: false },
+            { id: 1, label: "Освоить JS", isDone: true },
+            { id: 2, label: "Освоить React", isDone: true },
+            { id: 3, label: "Выполнить todo", isDone: true },
+            { id: 4, label: "Оживить todo", isDone: true },
             { id: 5, label: "Выполнить проект на React", isDone: false },
-            { id: 6, label: "Найти стажировку/работу", isDone: false },
+            { id: 6, label: "Найти стажировку / работу", isDone: false },
         ],
         taskInput: "",
         filter: FILTER_STATUSES.ALL,
