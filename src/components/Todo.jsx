@@ -2,6 +2,9 @@ import React from "react";
 import { filterOptions, FILTER_STATUSES } from "./constants";
 import { CheckboxGroup } from "./common";
 import styles from "./styles.module.css";
+import {connect} from "react-redux";
+import { TASKS_ACTIONS, TasksSelectors, TasksActionSelectors } from "../store";
+
 
 const filterTasks = (filter, user) => {
     if (filter === FILTER_STATUSES.ALL) {
@@ -13,30 +16,15 @@ const filterTasks = (filter, user) => {
     return !user.isDone;
 }
 
-const generateId = (tasks) => {
-    const ids = tasks.map(({ id }) => id);
-    if (ids.length === 0) return 1;
-    else return Math.max(...ids) + 1;
-}
-
-export class Todo extends React.Component {
+class TodoOriginal extends React.Component {
 
     state = {
-        tasks: [
-            { id: 1, label: "Освоить JS", isDone: true },
-            { id: 2, label: "Освоить React", isDone: true },
-            { id: 3, label: "Выполнить todo", isDone: true },
-            { id: 4, label: "Оживить todo", isDone: true },
-            { id: 5, label: "Выполнить проект на React", isDone: false },
-            { id: 6, label: "Найти стажировку / работу", isDone: false },
-        ],
         taskInput: "",
         filter: FILTER_STATUSES.ALL,
     }
 
     deleteTaskHandler = (id) => {
-        this.setState((prevState) => (
-            {tasks: prevState.tasks.filter(({ id: tasksID }) => tasksID !== id)}))
+        this.props.deleteTask(id);
     }
 
     inputChangeHandker = (event) => {
@@ -44,30 +32,19 @@ export class Todo extends React.Component {
     }
 
     addTaskHandler = () => {
-        this.setState((prevState) => ({
-            tasks: prevState.tasks.concat(
-                [{ id: generateId(prevState.tasks), label: prevState.taskInput, isDone: false }]
-            ), taskInput: ""
-        }))
-    }
+        this.props.addTasks({label: this.state.taskInput, isDone: false })}
 
     toggleCheckbox = (id) => {
-       this.setState((prevState) => ({
-           tasks: prevState.tasks.map((task) => {
-               if (task.id === id) {
-                   return { ...task, isDone: !task.isDone }
-               }
-               else return task 
-           })
-       }))
+       this.props.toggleCheckbox(id)
     }
 
     changeFilterHandler = (event) => {
         this.setState({filter: event.target.value})
     }
 
-    render() {
-        const { tasks, taskInput, filter } = this.state;
+    render() { 
+        const { taskInput, filter } = this.state;
+        const { tasks } = this.props;
 
         return (
             <div className={styles.wrapper}>
@@ -98,3 +75,17 @@ export class Todo extends React.Component {
         );
     };
 }
+
+const mapStateToProps = (state) => {
+    return {
+        tasks: TasksSelectors.getTasks(state),
+    }
+}
+
+const mapDispatchToProps = {
+    addTasks: TasksActionSelectors.addTasks,
+    deleteTask: TasksActionSelectors.deleteTask,
+    toggleCheckbox: TasksActionSelectors.toggleCheckbox,
+}
+
+export const Todo = connect (mapStateToProps, mapDispatchToProps) (TodoOriginal)
