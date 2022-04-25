@@ -10,6 +10,11 @@ export const toggleCheckbox = (task) => ({
   type: TASKS_ACTIONS.TOGGLE_CHECKBOX,
 });
 export const addTasks = (task) => ({
-  type: TASKS_ACTIONS.ADD_TASK,
   payload: task,
+  type: TASKS_ACTIONS.ADD_TASK,
+});
+
+export const changeFilter = (event) => ({
+  payload: event,
+  type: TASKS_ACTIONS.FILTER_TASKS,
 });

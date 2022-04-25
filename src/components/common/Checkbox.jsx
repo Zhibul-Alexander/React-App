@@ -1,4 +1,4 @@
-import styles from "../styles.module.css"
+import styles from "../Tasks/styles.module.css"
 
 
 function Checkbox({ label, value, checked, onChange }) {

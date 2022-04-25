@@ -1,4 +1,6 @@
 import { TASKS_ACTIONS } from "./constants";
+import { combineReducers } from "redux";
+import { FILTER_STATUSES } from "../components/Tasks/constants";
 
 const generateId = (tasks) => {
   const ids = tasks.map(({ id }) => id);
@@ -15,9 +17,10 @@ const INITIAL_STATE = {
     { id: 5, label: "Выполнить проект на React", isDone: false },
     { id: 6, label: "Найти стажировку / работу", isDone: false },
   ],
+  filter: FILTER_STATUSES.ALL,
 };
 
-export const reducer = (state = INITIAL_STATE, action) => {
+const tasksReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case TASKS_ACTIONS.DELETE_TASK: {
       return {
@@ -45,3 +48,20 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+const filterReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case TASKS_ACTIONS.FILTER_TASKS: {
+      return {
+        filter: action.payload,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+export const rootReducer = combineReducers({
+  tasksReducer,
+  filterReducer,
+});

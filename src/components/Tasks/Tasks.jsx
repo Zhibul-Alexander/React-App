@@ -1,26 +1,14 @@
 import React from "react";
-import { filterOptions, FILTER_STATUSES } from "./constants";
-import { CheckboxGroup } from "./common";
+import { filterOptions} from "./constants";
+import { CheckboxGroup } from "../common";
 import styles from "./styles.module.css";
 import {connect} from "react-redux";
-import { TASKS_ACTIONS, TasksSelectors, TasksActionSelectors } from "../store";
+import { TasksSelectors, TasksActionSelectors } from "../../store";
 
-
-const filterTasks = (filter, user) => {
-    if (filter === FILTER_STATUSES.ALL) {
-        return true;
-    }
-    if (filter === FILTER_STATUSES.FULFILLED) {
-        return user.isDone;
-    }
-    return !user.isDone;
-}
-
-class TodoOriginal extends React.Component {
+class TasksOriginal extends React.Component {
 
     state = {
         taskInput: "",
-        filter: FILTER_STATUSES.ALL,
     }
 
     deleteTaskHandler = (id) => {
@@ -39,12 +27,12 @@ class TodoOriginal extends React.Component {
     }
 
     changeFilterHandler = (event) => {
-        this.setState({filter: event.target.value})
+        this.props.changeFilter(event.target.value);
     }
 
     render() { 
-        const { taskInput, filter } = this.state;
-        const { tasks } = this.props;
+        const { taskInput } = this.state;
+        const { tasks, filter } = this.props;
 
         return (
             <div className={styles.wrapper}>
@@ -59,7 +47,7 @@ class TodoOriginal extends React.Component {
                     </div>
                 </header>
                 <main className={styles.main}>
-                    {tasks.filter((task) => filterTasks(filter, task)).map(({ id, label, isDone }) => {
+                    {tasks.map(({ id, label, isDone }) => {
                         return (
                             <div className={styles.mainTasks} key={id}>
                                 <div><input onChange={(() => {
@@ -79,6 +67,7 @@ class TodoOriginal extends React.Component {
 const mapStateToProps = (state) => {
     return {
         tasks: TasksSelectors.getTasks(state),
+        filter: TasksSelectors.getFilter(state),
     }
 }
 
@@ -86,6 +75,7 @@ const mapDispatchToProps = {
     addTasks: TasksActionSelectors.addTasks,
     deleteTask: TasksActionSelectors.deleteTask,
     toggleCheckbox: TasksActionSelectors.toggleCheckbox,
+    changeFilter: TasksActionSelectors.changeFilter,
 }
 
-export const Todo = connect (mapStateToProps, mapDispatchToProps) (TodoOriginal)
+export const Tasks = connect (mapStateToProps, mapDispatchToProps) (TasksOriginal)
