@@ -18,3 +18,9 @@ export const changeFilter = (event) => ({
   payload: event,
   type: TASKS_ACTIONS.FILTER_TASKS,
 });
+
+export const checkRegistration = () => ({
+  type: TASKS_ACTIONS.CHECK_REGISTRATION,
+});
+
+export const logoutApp = () => ({ type: TASKS_ACTIONS.LOGOUT });

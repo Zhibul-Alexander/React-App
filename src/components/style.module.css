@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+    font-size: 24px;
+    padding: 10px 20px; 
+}
+
+.link {
+    text-decoration: none;
+
+    margin: 0 20px;
+    padding: 10px 20px;
+
+    color: black;
+    background-color: rgba(255, 255, 255, 0.433); 
+    border: 1px solid black;   
+    border-radius: 20px;
+
+
+    cursor: pointer;
+}
+
+.border {
+    padding: 10px;
+}

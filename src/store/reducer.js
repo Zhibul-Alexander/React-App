@@ -18,6 +18,7 @@ const INITIAL_STATE = {
     { id: 6, label: "Найти стажировку / работу", isDone: false },
   ],
   filter: FILTER_STATUSES.ALL,
+  isAuth: false,
 };
 
 const tasksReducer = (state = INITIAL_STATE, action) => {
@@ -61,7 +62,25 @@ const filterReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+export const registrationReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case TASKS_ACTIONS.CHECK_REGISTRATION: {
+      return {
+        isAuth: true,
+      };
+    }
+    case TASKS_ACTIONS.LOGOUT: {
+      return {
+        isAuth: false,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
 export const rootReducer = combineReducers({
   tasksReducer,
   filterReducer,
+  registrationReducer,
 });

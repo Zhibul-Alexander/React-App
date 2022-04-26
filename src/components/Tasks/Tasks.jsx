@@ -4,8 +4,10 @@ import { CheckboxGroup } from "../common";
 import styles from "./styles.module.css";
 import {connect} from "react-redux";
 import { TasksSelectors, TasksActionSelectors } from "../../store";
+import { compose } from "redux";
+import { withRouter } from "react-router-dom";
 
-class TasksOriginal extends React.Component {
+class newTasks extends React.Component {
 
     state = {
         taskInput: "",
@@ -78,4 +80,5 @@ const mapDispatchToProps = {
     changeFilter: TasksActionSelectors.changeFilter,
 }
 
-export const Tasks = connect (mapStateToProps, mapDispatchToProps) (TasksOriginal)
+export const Tasks = connect (mapStateToProps, mapDispatchToProps) (newTasks)
+// export const Tasks = compose(withRouter,connect (mapStateToProps, mapDispatchToProps) (newTasks))
