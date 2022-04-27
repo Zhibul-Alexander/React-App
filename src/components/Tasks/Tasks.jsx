@@ -4,8 +4,6 @@ import { CheckboxGroup } from "../common";
 import styles from "./styles.module.css";
 import {connect} from "react-redux";
 import { TasksSelectors, TasksActionSelectors } from "../../store";
-import { compose } from "redux";
-import { withRouter } from "react-router-dom";
 
 class newTasks extends React.Component {
 
@@ -81,4 +79,3 @@ const mapDispatchToProps = {
 }
 
 export const Tasks = connect (mapStateToProps, mapDispatchToProps) (newTasks)
-// export const Tasks = compose(withRouter,connect (mapStateToProps, mapDispatchToProps) (newTasks))

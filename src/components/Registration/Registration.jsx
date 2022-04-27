@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { TasksSelectors, TasksActionSelectors} from "../../store"; 
-import { checkRegistration } from "../../store/actionsCreators";
 import style from "./app.module.css";
 
 export class newRegistration extends React.Component {
