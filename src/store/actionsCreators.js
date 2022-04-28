@@ -23,4 +23,9 @@ export const checkRegistration = () => ({
   type: TASKS_ACTIONS.CHECK_REGISTRATION,
 });
 
+export const addAdditionTask = (text, id) => ({
+  type: TASKS_ACTIONS.ADD_ADDITION_TASK,
+  payload: { id: id, text: text },
+});
+
 export const logoutApp = () => ({ type: TASKS_ACTIONS.LOGOUT });

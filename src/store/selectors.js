@@ -15,6 +15,8 @@ export const filterTasks = (filter, task) => {
 export const getTasksOriginal = (state) => state.tasksReducer.tasks;
 export const getFilter = (state) => state.filterReducer.filter;
 export const checkRegistration = (state) => state.registrationReducer.isAuth;
+export const getTaskByID = (taskID) => (state) =>
+  getTasks(state).find(({ id }) => id === Number(taskID));
 
 export const getTasks = (state) => {
   const tasks = getTasksOriginal(state);

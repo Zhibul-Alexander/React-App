@@ -10,12 +10,12 @@ const generateId = (tasks) => {
 
 const INITIAL_STATE = {
   tasks: [
-    { id: 1, label: "Освоить JS", isDone: true },
-    { id: 2, label: "Освоить React", isDone: true },
-    { id: 3, label: "Выполнить todo", isDone: true },
-    { id: 4, label: "Оживить todo", isDone: true },
-    { id: 5, label: "Выполнить проект на React", isDone: false },
-    { id: 6, label: "Найти стажировку / работу", isDone: false },
+    { id: 1, label: "Освоить JS", isDone: true, addition: "" },
+    { id: 2, label: "Освоить React", isDone: true, addition: "" },
+    { id: 3, label: "Выполнить todo", isDone: true, addition: "" },
+    { id: 4, label: "Оживить todo", isDone: true, addition: "" },
+    { id: 5, label: "Выполнить проект на React", isDone: false, addition: "" },
+    { id: 6, label: "Найти стажировку / работу", isDone: false, addition: "" },
   ],
   filter: FILTER_STATUSES.ALL,
   isAuth: false,
@@ -43,6 +43,16 @@ const tasksReducer = (state = INITIAL_STATE, action) => {
       const id = generateId(state.tasks);
       return {
         tasks: state.tasks.concat({ ...action.payload, id }),
+      };
+    }
+    case TASKS_ACTIONS.ADD_ADDITION_TASK: {
+      return {
+        tasks: state.tasks.map((task) => {
+          if (action.payload.id === task.id) {
+            return { ...task, addition: action.payload.text };
+          }
+          return task;
+        }),
       };
     }
     default:

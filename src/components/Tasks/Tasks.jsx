@@ -1,4 +1,6 @@
 import React from "react";
+import { withRouter, Link } from "react-router-dom";
+import { compose } from "redux";
 import { filterOptions} from "./constants";
 import { CheckboxGroup } from "../common";
 import styles from "./styles.module.css";
@@ -50,9 +52,11 @@ class newTasks extends React.Component {
                     {tasks.map(({ id, label, isDone }) => {
                         return (
                             <div className={styles.mainTasks} key={id}>
-                                <div><input onChange={(() => {
+                                <div> 
+                                    <input onChange={(() => {
                                     this.toggleCheckbox(id)
-                                })} className={styles.mainCheckbox} type="checkbox" checked={isDone} />{label}</div>
+                                })} className={styles.mainCheckbox} type="checkbox" checked={isDone} />{`${id}.${label}`}</div>
+                                <Link className={styles.link} to={`/tasks/task/${id}`}>Addition</Link>
                                 {isDone && <button onClick={() => {
                                     this.deleteTaskHandler(id)
                                 }} className={styles.mainButton}>✕</button>}
@@ -78,4 +82,4 @@ const mapDispatchToProps = {
     changeFilter: TasksActionSelectors.changeFilter,
 }
 
-export const Tasks = connect (mapStateToProps, mapDispatchToProps) (newTasks)
+export const Tasks = compose(withRouter ,connect (mapStateToProps, mapDispatchToProps))(newTasks)
