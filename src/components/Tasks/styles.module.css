@@ -17,8 +17,6 @@
     text-align: center;
 
     width: 100%;
-
-    border-bottom: 1px solid black;
 }
 
 .headerTitle {
@@ -35,6 +33,7 @@
 
     font-size: 24px;
 
+    background-color: rgba(255, 255, 255, 0.433);
     cursor: pointer;
 }
 
@@ -47,6 +46,7 @@
 
     font-size: 24px;
 
+    background-color: rgba(255, 255, 255, 0.433); 
     cursor: pointer;
 }
 
@@ -101,6 +101,22 @@
 
     padding: 5px 10px;
     margin-left: 15px;
+
+    background-color: rgba(255, 255, 255, 0.433); 
+    cursor: pointer;
+}
+
+.link {
+    text-decoration: none;
+
+    margin: 0 10px;
+    padding: 10px;
+
+    color: black;
+    background-color: rgba(255, 255, 255, 0.433); 
+    border: 1px solid black;   
+    border-radius: 20px;
+
 
     cursor: pointer;
 }
